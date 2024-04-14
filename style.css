@@ -1,3 +1,7 @@
+.drawing-area {
+    position: relative; /* Key change */
+}
+
 #drawingCanvas {
     object-fit: contain;
     border: 1px solid black;
@@ -6,4 +10,10 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+h1,
+.controls {
+    position: relative; /* May be needed */
+    z-index: 10;  /* Higher than the canvas z-index */
 }
