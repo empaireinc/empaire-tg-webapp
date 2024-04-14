@@ -8,14 +8,6 @@ const ctx = canvas.getContext('2d');
 const brushSize = document.getElementById('brushSize');
 const sendDataBtn = document.getElementById('sendData');
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    // Redraw the image if needed (see point 2)
-}
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas(); // Call initially on page load
 
 // Set up image loading
 const img = new Image();
