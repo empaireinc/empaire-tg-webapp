@@ -13,14 +13,25 @@ const sendDataBtn = document.getElementById('sendData');
 const img = new Image();
 img.crossOrigin = "Anonymous"; // Important for loading images from different domains
 img.onload = function() {
-    canvas.width = img.width;
-    canvas.height = img.height;
-    let scaleFactor = Math.min(canvas.width / img.width, canvas.height / img.height);
-    let scaledWidth = img.width * scaleFactor;
-    let scaledHeight = img.height * scaleFactor;
-    let x = (canvas.width - scaledWidth) / 2;
-    let y = (canvas.height - scaledHeight) / 2;
-    ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
+    // Preprocess image scaling
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+
+    // Calculate scaling ratio (assuming you want it to fit the screen)
+    let scaleFactor = Math.min(window.innerWidth / img.width, window.innerHeight / img.height);
+    tempCanvas.width = img.width * scaleFactor;
+    tempCanvas.height = img.height * scaleFactor;
+
+    tempCtx.drawImage(img, 0, 0, tempCanvas.width, tempCanvas.height);
+
+    // Set up your actual canvas
+    canvas.width = tempCanvas.width;
+    canvas.height = tempCanvas.height;
+
+    // Draw the pre-scaled image (no more scaling needed)
+    ctx.drawImage(tempCanvas, 0, 0);
+
+    // ... rest of your touch/mouse event handlers (coordinates should work directly) ...
 };
 img.src = originalImageURL;
 
