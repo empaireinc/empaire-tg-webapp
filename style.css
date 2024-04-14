@@ -1,19 +1,17 @@
 .drawing-area {
-    position: relative; /* Key change for absolute canvas positioning */
+  display: flex;
+  flex-direction: column;
+}
+
+.draw-text,
+.canvas-container,
+.controls {
+  flex: 1;  /* Make all elements flexible */
 }
 
 #drawingCanvas {
-    object-fit: contain;
-    border: 1px solid black;
-    max-width: 100%;
-    height: auto;
-    position: absolute; /* Remains absolute within the relative container */
-    top: 0;
-    left: 0;
-}
-
-/* Assuming you have elements with classes .draw-text and .brush-bar */
-.draw-text,
-.brush-bar {
-    z-index: 10; /* Adjust if needed, but avoid excessive values */
+  object-fit: contain; /* Adjust image scaling if needed */
+  border: 1px solid black;
+  max-width: 100%;
+  height: auto;
 }
