@@ -1,5 +1,5 @@
 .drawing-area {
-    position: relative; /* Key change */
+    position: relative; /* Key change for absolute canvas positioning */
 }
 
 #drawingCanvas {
@@ -7,13 +7,13 @@
     border: 1px solid black;
     max-width: 100%;
     height: auto;
-    position: absolute;
+    position: absolute; /* Remains absolute within the relative container */
     top: 0;
     left: 0;
 }
 
-h1,
-.controls {
-    position: relative; /* May be needed */
-    z-index: 10;  /* Higher than the canvas z-index */
+/* Assuming you have elements with classes .draw-text and .brush-bar */
+.draw-text,
+.brush-bar {
+    z-index: 10; /* Adjust if needed, but avoid excessive values */
 }
