@@ -1,0 +1,13 @@
+<html ng-app="custom-webapp-ui" lang="en">
+<head>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="canvas_drawing.js"></script>
+</head>
+<body ng-controller="CustomUIController">
+  <canvas></canvas>
+  <div ng-repeat="bar in lineWidthBars">
+    <input type="range" min="1" max="30" ng-model="lineWidth" value="{{bar.value}}">
+  </div>
+</body>
+</html>
