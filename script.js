@@ -27,6 +27,11 @@ canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
 canvas.addEventListener('mouseout', stopDrawing); // Stop if mouse leaves the canvas
 
+canvas.addEventListener('touchstart', startDrawing);
+canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchend', stopDrawing);
+canvas.addEventListener('touchcancel', stopDrawing);
+
 function startDrawing(e) {
   isDrawing = true;
   draw(e);
