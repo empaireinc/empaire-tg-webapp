@@ -25,7 +25,7 @@ ctx.strokeStyle = 'red'; // Default drawing color
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
-canvas.addEventListener('mouseout', stopDrawing); // Stop if mouse leaves the canvas
+canvas.addEventListener('mouseout', stopDrawing);
 
 canvas.addEventListener('touchstart', startDrawing);
 canvas.addEventListener('touchmove', draw);
@@ -33,6 +33,7 @@ canvas.addEventListener('touchend', stopDrawing);
 canvas.addEventListener('touchcancel', stopDrawing);
 
 function startDrawing(e) {
+  e.preventDefault();
   isDrawing = true;
   draw(e);
 }
