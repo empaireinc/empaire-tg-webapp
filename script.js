@@ -21,9 +21,14 @@ resizeCanvas(); // Call initially on page load
 const img = new Image();
 img.crossOrigin = "Anonymous"; // Important for loading images from different domains
 img.onload = function() {
-  canvas.width = img.width;
-  canvas.height = img.height;
-  ctx.drawImage(img, 0, 0);
+    canvas.width = img.width;
+    canvas.height = img.height;
+    let scaleFactor = Math.min(canvas.width / img.width, canvas.height / img.height);
+    let scaledWidth = img.width * scaleFactor;
+    let scaledHeight = img.height * scaleFactor;
+    let x = (canvas.width - scaledWidth) / 2;
+    let y = (canvas.height - scaledHeight) / 2;
+    ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
 };
 img.src = originalImageURL;
 
