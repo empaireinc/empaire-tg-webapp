@@ -34,6 +34,7 @@ canvas.addEventListener('touchcancel', stopDrawing);
 
 function startDrawing(e) {
   e.preventDefault();
+  console.log("Touch Start Event");
   isDrawing = true;
   draw(e);
 }
@@ -42,8 +43,15 @@ function draw(e) {
   if (!isDrawing) return;
 
   const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  var x;
+  var y;
+  if (e.touches) {
+    x = event.touches[0].clientX - rect.left;
+    y = event.touches[0].clientY - rect.top;
+  } else {
+    x = e.clientX - rect.left;
+    y = e.clientY - rect.top;
+  }
 
   ctx.lineWidth = brushSize.value;
   ctx.lineCap = 'round';
