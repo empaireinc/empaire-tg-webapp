@@ -23,7 +23,6 @@ angular.module("custom-webapp-ui", []).controller('CustomUIController', function
     }
   }
 
-
   const image = new Image();
   image.src = decodedImageURL;
   image.onload = function() {
@@ -66,6 +65,7 @@ angular.module("custom-webapp-ui", []).controller('CustomUIController', function
   }
 
   let isDrawing = false;
+
   function startDrawing(event) {
     event.preventDefault(); // Prevent default for both mouse and touch events
     isDrawing = true;

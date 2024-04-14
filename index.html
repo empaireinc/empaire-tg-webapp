@@ -3,11 +3,16 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
   <script src="canvas_drawing.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="CustomUIController">
-  <canvas></canvas>
-  <div ng-repeat="bar in lineWidthBars">
-    <input type="range" min="1" max="30" ng-model="lineWidth" value="{{bar.value}}">
+  <h1>Simple Drawing App</h1>
+  <canvas id="drawingCanvas"></canvas>
+  <div class="controls">
+    Brush Size: <input type="range" id="brushSize" min="1" max="20" value="5">
+    <button id="sendData">Send Drawing</button>
   </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
