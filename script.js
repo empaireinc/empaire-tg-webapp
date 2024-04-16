@@ -31,7 +31,6 @@ img.onload = function() {
     // Draw the pre-scaled image (no more scaling needed)
     ctx.drawImage(tempCanvas, 0, 0);
 
-    // ... rest of your touch/mouse event handlers (coordinates should work directly) ...
 };
 img.src = originalImageURL;
 
@@ -85,12 +84,71 @@ function stopDrawing() {
 
 // Send data to backend
 sendDataBtn.addEventListener('click', () => {
-  const imageData = canvas.toDataURL(); // Get canvas data as image
-  sendDataToBackend(imageData);
+    // Create black and white mask
+    const originalCanvas = document.getElementById('drawingCanvas');
+    const ctxOriginal = originalCanvas.getContext('2d');
+
+    // Create white mask canvas
+    const maskCanvas = document.createElement('canvas');
+    const maskCtx = maskCanvas.getContext('2d');
+    maskCanvas.width = originalCanvas.width;
+    maskCanvas.height = originalCanvas.height;
+    maskCtx.fillStyle = 'white';
+    maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
+
+    // Temporary in-memory canvas for the original image
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
+    tempCanvas.width = originalCanvas.width;
+    tempCanvas.height = originalCanvas.height;
+    tempCtx.drawImage(originalCanvas, 0, 0);
+
+    // Create black dots for drawing
+    // ... (Your existing code to draw black dots on maskCanvas remains the same) ...
+
+    // Isolate the drawn pixels
+    maskCtx.fillStyle = 'white';
+    maskCtx.fillRect(0, 0, maskCanvas.width, maskCanvas.height);
+
+    // Isolate the drawn pixels
+    const maskImageData = maskCtx.getImageData(0, 0, maskCanvas.width, maskCanvas.height);
+    const tempImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+
+    for (let i = 0; i < maskImageData.data.length; i += 4) {
+      if (tempImageData.data[i + 3] === 0 && maskImageData.data[i + 3] > 0) { // Check for transparency in tempImage and non-transparency in maskImage
+        maskImageData.data[i] = 0; // Set to black
+        maskImageData.data[i + 1] = 0;
+        maskImageData.data[i + 2] = 0;
+        maskImageData.data[i + 3] = 255; // Set alpha to opaque (explicitly)
+      } else {  // For non-drawn pixels
+        maskImageData.data[i] = 255; // Set to white
+        maskImageData.data[i + 1] = 255;
+        maskImageData.data[i + 2] = 255;
+      }
+    }
+    maskCtx.putImageData(maskImageData, 0, 0); // Update maskCanvas
+
+    // Finally, send base64Mask
+    const base64Mask = maskCanvas.toDataURL('image/png');
+    // Send mask data to backend
+    sendDataToBackend(base64Mask);
 });
 
-function sendDataToBackend(imageData) {
-  // Implement your logic to send imageData (the mask) to the backend.
-  // You might use an XMLHttpRequest or the newer fetch() API.
-  console.log('Sending data to backend:', imageData);
+
+async function sendDataToBackend(imageData) {
+  try {
+      const response = await fetch('http://0.0.0.0:8000/upload', {
+          method: 'POST',
+          body: imageData
+      });
+
+      if (response.ok) {
+          const responseText = await response.text();
+          console.log('Success:', responseText);
+      } else {
+          console.error('Error:', response.status, response.statusText);
+      }
+  } catch (error) {
+      console.error('Error sending data:', error);
+  }
 }
