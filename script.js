@@ -15,10 +15,10 @@ let originalH, originalW;
 
 img.onload = function() {
     let scaleFactor = Math.min(window.innerWidth / img.naturalWidth, window.innerHeight / img.naturalHeight);
-    originalW = img.naturalWidth * scaleFactor;
-    originalH = img.naturalHeight * scaleFactor;
-    canvas.width = originalW;
-    canvas.height = originalH;
+    originalW = img.naturalWidth;
+    originalH = img.naturalHeight;
+    canvas.width = originalW * scaleFactor;
+    canvas.height = originalH * scaleFactor;
 };
 
 img.src = originalImageURL;
