@@ -8,18 +8,3 @@
 .controls {
   flex: 1;  /* Make all elements flexible */
 }
-
-#drawingCanvas {
-    object-fit: contain;
-    border: 1px solid black;
-    max-width: 100%;
-    height: auto;
-
-}
-
-.background-image-container {
-    /* Other styles */
-    background-image: url(''); /* Placeholder - initially no image */
-    background-size: cover;
-    background-position: center;
-}
