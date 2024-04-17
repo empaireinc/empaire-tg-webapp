@@ -16,3 +16,10 @@
     height: auto;
 
 }
+
+.background-image-container {
+    /* Other styles */
+    background-image: url(''); /* Placeholder - initially no image */
+    background-size: cover;
+    background-position: center;
+}
