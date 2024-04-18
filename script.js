@@ -96,7 +96,7 @@ async function sendDataToBackend(imageData) {
         height: originalH,
         width: originalW,
       };
-      const response = await fetch('http://0.0.0.0:8000/upload', {
+      const response = await fetch('http://0.0.0.0:8000/upload_mask', {
           method: 'POST',
           body: JSON.stringify(data)
       });
