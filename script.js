@@ -2,7 +2,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 let originalImageURL = urlParams.get('original');
 
-originalImageURL = originalImageURL
 
 // Get elements
 const canvas = document.getElementById('drawingCanvas');
