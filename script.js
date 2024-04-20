@@ -1,6 +1,6 @@
 // Get the original image URL from the query parameters
 const urlParams = new URLSearchParams(window.location.search);
-const originalImageURL = urlParams.get('original');
+let originalImageURL = urlParams.get('original');
 
 originalImageURL = 'http://' + originalImageURL
 
