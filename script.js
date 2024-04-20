@@ -96,10 +96,10 @@ async function sendDataToBackend(imageData) {
   try {
       const data = {
         mask: imageData,
-        height: originalH,
-        width: originalW,
+        height: 100,
+        width: 100,
       };
-      const response = await fetch('http://0.0.0.0:8000/upload_mask', {
+      const response = await fetch('https://vps-9491c78f.vps.ovh.net:48001/upload_mask', {
           method: 'POST',
           body: JSON.stringify(data)
       });
