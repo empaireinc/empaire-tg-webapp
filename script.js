@@ -2,6 +2,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 const originalImageURL = urlParams.get('original');
 
+originalImageURL = 'http://' + originalImageURL
+
 // Get elements
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
@@ -17,16 +19,18 @@ img.onload = function() {
     let scaleFactor = Math.min(window.innerWidth / img.naturalWidth, window.innerHeight / img.naturalHeight);
     originalW = img.naturalWidth;
     originalH = img.naturalHeight;
+    console.log("original image size", originalW, originalH);
+    console.log("scalefactor", scaleFactor)
     canvas.width = originalW * scaleFactor;
     canvas.height = originalH * scaleFactor;
 };
 
 img.src = originalImageURL;
 
-canvas.style.backgroundImage = `url('${originalImageURL}')`;
+canvas.style.backgroundImage = `url('${img.src}')`;
 canvas.style.backgroundSize = "100%";
 
-console.log(canvas.width, canvas.height);
+console.log("canvas size", canvas.width, canvas.height);
 
 // Drawing functionality
 let isDrawing = false;
