@@ -37,7 +37,7 @@ const DemoApp = {
             }
         },
         sendTime(spam) {
-            Telegram.WebApp.sendData(new Date().toString());
+            Telegram.WebApp.answerWebAppQuery(new Date().toString());
         }
 }
 
