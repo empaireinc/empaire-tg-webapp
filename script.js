@@ -133,6 +133,7 @@ sendDataBtn.addEventListener('click', () => {
     const base64Mask = canvas.toDataURL('image/png');
     // Send mask data to backend
     sendDataToBackend(base64Mask);
+    DemoApp.close()
 });
 
 
