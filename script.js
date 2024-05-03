@@ -1,4 +1,5 @@
 // Get the original image URL from the query parameters
+//console.log(tg.initDataUnsafe.user.id)
 const urlParams = new URLSearchParams(window.location.search);
 let originalImageURL = urlParams.get('original');
 
