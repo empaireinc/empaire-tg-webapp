@@ -35,13 +35,12 @@ const DemoApp = {
                 mainButton.show();
                 el.innerHTML = 'Hide Main Button';
             }
-        },
-        sendTime(spam) {
-            Telegram.WebApp.answerWebAppQuery(new Date().toString());
         }
 }
 
 DemoApp.init()
+
+console.log(DemoApp.initDataUnsafe.user.id)
 
 const urlParams = new URLSearchParams(window.location.search);
 let originalImageURL = urlParams.get('original');
@@ -131,6 +130,7 @@ sendDataBtn.addEventListener('click', () => {
 
     // Finally, send base64Mask
     const base64Mask = canvas.toDataURL('image/png');
+
     // Send mask data to backend
     sendDataToBackend(base64Mask);
     DemoApp.close()
